@@ -1,82 +1,12 @@
-#!/bin/bash
- 
-# Fetch the server's hostname
-HOSTNAME=$(hostname)
- 
-# Generate the HTML content
-cat <<EOF > /var/www/html/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Server Hostname</title>
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin-top: 50px;
-        }
-        h2 {
-            color: #333;
-        }
-        p {
-            font-size: 24px;
-            color: #555;
-        }
-</style>
+<title>Server Private IP</title>
 </head>
 <body>
-<h2>Your Server's Hostname:</h2>
-<p>$HOSTNAME</p>
+<h2>Your Server's Private IP Address:</h2>
+<p>192.168.1.2</p> <!-- Replace with your server's actual private IP -->
 </body>
 </html>
-EOF
-
-#!/bin/bash   # Fetch the server's hostname... by Soundarrajan P
-Soundarrajan P
-10:27
-#!/bin/bash
- 
-# Fetch the server's hostname
-HOSTNAME=$(hostname)
- 
-# Fetch the server's private IP address
-PRIVATE_IP=$(hostname -I | awk '{print $1}')
- 
-# Fetch the server's public IP address
-PUBLIC_IP=$(curl -s ifconfig.me)
- 
-# Generate the HTML content
-cat <<EOF > /var/www/html/index.html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Server Info</title>
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin-top: 50px;
-        }
-        h2 {
-            color: #333;
-        }
-        p {
-            font-size: 24px;
-            color: #555;
-        }
-</style>
-</head>
-<body>
-<h2>Server Information:</h2>
-<p><strong>Hostname:</strong> $HOSTNAME</p>
-<p><strong>Private IP Address:</strong> $PRIVATE_IP</p>
-<p><strong>Public IP Address:</strong> $PUBLIC_IP</p>
-</body>
-</html>
-EOF
