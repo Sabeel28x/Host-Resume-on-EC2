@@ -1,25 +1,82 @@
+#!/bin/bash
+ 
+# Fetch the server's hostname
+HOSTNAME=$(hostname)
+ 
+# Generate the HTML content
+cat <<EOF > /var/www/html/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Display Client IP Address</title>
-<script>
-        function fetchIP() {
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('clientIp').textContent = data.ip;
-                })
-                .catch(error => {
-                    console.error('Error fetching the IP address:', error);
-                    document.getElementById('clientIp').textContent = 'Could not fetch IP address.';
-                });
+<title>Server Hostname</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 50px;
         }
-</script>
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 24px;
+            color: #555;
+        }
+</style>
 </head>
-<body onload="fetchIP()">
-<h2>Your IP Address:</h2>
-<p id="clientIp">Fetching IP address...</p>
+<body>
+<h2>Your Server's Hostname:</h2>
+<p>$HOSTNAME</p>
 </body>
 </html>
+EOF
+
+#!/bin/bash   # Fetch the server's hostname... by Soundarrajan P
+Soundarrajan P
+10:27
+#!/bin/bash
+ 
+# Fetch the server's hostname
+HOSTNAME=$(hostname)
+ 
+# Fetch the server's private IP address
+PRIVATE_IP=$(hostname -I | awk '{print $1}')
+ 
+# Fetch the server's public IP address
+PUBLIC_IP=$(curl -s ifconfig.me)
+ 
+# Generate the HTML content
+cat <<EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Server Info</title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            font-size: 24px;
+            color: #555;
+        }
+</style>
+</head>
+<body>
+<h2>Server Information:</h2>
+<p><strong>Hostname:</strong> $HOSTNAME</p>
+<p><strong>Private IP Address:</strong> $PRIVATE_IP</p>
+<p><strong>Public IP Address:</strong> $PUBLIC_IP</p>
+</body>
+</html>
+EOF
